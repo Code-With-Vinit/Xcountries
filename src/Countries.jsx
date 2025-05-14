@@ -36,21 +36,14 @@ const Endpoint="https://xcountries-backend.azurewebsites.net/all";
 function Countries() {
 
     const [apiData,setApiData]= useState([]);
-    const [error,setError]=useState(null);
 
     useEffect(()=>{
-        fetch(Endpoint).then(response=>response.json()).then((data)=>
-            setApiData(data)
-        ).catch((error)=>{
-            console.log("Error fetching data: ",error);
-            setError(error);
-            }
-        )
+        fetch(Endpoint).then((response)=>response.json()).then((data)=>{
+            setApiData(data);
+        }).catch((error)=>
+            console.error("Error fetching data: ",error)
+        );
     },[])
-
-    if (error) {
-        return <div>{error}</div>; // Render error message
-      }
 
 
 
